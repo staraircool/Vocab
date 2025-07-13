@@ -7,16 +7,19 @@ workflows:
       xcode: latest
       cocoapods: latest
       java: 17
-    trigger:
-      branch:
-        - main
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
     scripts:
       - name: Set up Flutter
-        script: | 
+        script: |
           flutter clean
           flutter pub get
       - name: Build Android Release
-        script: | 
+        script: |
           flutter build apk --release
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
@@ -24,10 +27,8 @@ workflows:
       email:
         recipients:
           - your_email@example.com # Replace with your email to receive build notifications
-        success:
-          - attachments
-          - link
-        failure:
-          - attachments
-          - link
+        notify:
+          success: true
+          failure: true
+
 
