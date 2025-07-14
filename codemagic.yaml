@@ -4,8 +4,6 @@ workflows:
     max_build_duration: 120
     environment:
       flutter: stable
-      xcode: latest
-      cocoapods: latest
       java: 17
     triggering:
       events:
